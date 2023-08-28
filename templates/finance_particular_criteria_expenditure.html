@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Here is where you spent it</title>
+  </head>
+  <body>
+    <center style="margin-top: 100px">
+      <h1 style="font-weight: lighter">List of money spend on {{header}}</h1>
+      <a href="/open_dashboard_4">Finance dashboard</a>&nbsp;|&nbsp;<a
+        href="/dashboard"
+        >Main Dashboard</a
+      >&nbsp;|&nbsp;
+      <a href="/logout">Logout</a>
+      <table border="1" style="margin-top: 15px">
+        <tr>
+          <th>Date</th>
+          <th>Amount Paid</th>
+          <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+          <td style="text-align: center">{{i[0]}}</td>
+          <td style="text-align: center">{{i[1]}}</td>
+          <td style="text-align: center; padding: 5px">
+            <a href="/{{i[2]}}/{{criteria_id}}/delete_expense_entry">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </center>
+  </body>
+</html>

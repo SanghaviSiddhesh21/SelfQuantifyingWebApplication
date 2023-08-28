@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracker_Adder</title>
+  </head>
+  <body>
+    <center style="margin-top: 150px">
+      <h1>Add Tracker</h1>
+      <a href="/dashboard">Main Dashboard</a>&nbsp;|&nbsp;
+      <a href="/logout">Logout</a>
+
+      <form action="/add_tracker" method="POST">
+        <br />
+        <table id="all-students" border="1">
+          <tr>
+            <th>Selection</th>
+            <th>Tracker_id</th>
+            <th>Tracker_name</th>
+          </tr>
+          {% for i in data %}
+          <tr>
+            <td style="text-align: center; padding: 5px">
+              <label for="tracker">Add</label>
+              <input
+                type="checkbox"
+                id="fname"
+                name="tracker"
+                value="{{i['tracker_id']}}"
+              /><br />
+            </td>
+            <td style="text-align: center; padding: 5px">
+              {{i['tracker_id']}}
+            </td>
+            <td style="text-align: center; padding: 5px">
+              {{i['tracker_name']}}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+    </center>
+  </body>
+</html>

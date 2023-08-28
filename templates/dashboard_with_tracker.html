@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1 style="font-weight: lighter">
+      <b>MainDashboard</b> - You are logged in {{username}}
+    </h1>
+    <a href="/logout">Logout</a>&nbsp;|&nbsp;<a href="/delete_account"
+      >Delete account</a
+    >
+    <table border="1" style="margin-top: 10px">
+      <tr>
+        <th>Name</th>
+        <th>Date of Birth</th>
+      </tr>
+      <tr>
+        <td style="text-align: center; padding: 5px">{{fname}} {{lname}}</td>
+        <td style="text-align: center; padding: 5px">{{dob}}</td>
+      </tr>
+    </table>
+    <br />
+    <br /><a href="/add_tracker">Add_Tracker</a>
+    <br />
+    <form>
+      <table id="all-students" border="1" style="margin-top: 10px">
+        <tr>
+          <th>Tracker_id</th>
+          <th>Tracker_name</th>
+          <th>Actions</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+          <td style="text-align: center">{{i['tracker_id']}}</td>
+          <td style="text-align: center; padding: 5px">
+            {{i['tracker_name']}}
+          </td>
+          <td style="text-align: center; padding: 5px">
+            &nbsp;
+            <a href="/open_dashboard_{{i['tracker_id']}}">Open</a
+            >&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="/{{i['tracker_id']}}/remove">Delete</a>&nbsp;
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      <br />
+    </form>
+  </body>
+</html>

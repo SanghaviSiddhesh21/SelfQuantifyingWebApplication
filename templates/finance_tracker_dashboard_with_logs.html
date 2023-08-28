@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Save it!</title>
+  </head>
+  <body>
+    <center style="margin-top: 100px">
+      <h1 style="font-weight: lighter">Track your finance</h1>
+      <a href="/expenditure_log">Add Spending</a>&nbsp;|&nbsp;
+      <a href="/dashboard">Main Dashboard</a>&nbsp;|&nbsp;
+      <a href="/logout">Logout</a><br />
+      <img src="/static/finance_dashboard.jpg" />
+      <table border="1">
+        <tr>
+          <th>Expense Criteria</th>
+          <th>Total Amount Spend</th>
+          <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+          <td style="text-align: center">{{i[1]}}</td>
+          <td style="text-align: center">{{i[2]}}</td>
+          <td style="text-align: center; padding: 5px">
+            <a href="/{{i[0]}}/List_of_particular_expenditure">List</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </center>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Tracker</title>
+  </head>
+  <body>
+    <center style="margin-top: 100px">
+      <h1 style="font-weight: lighter">Food tracker open dashboard</h1>
+      <a href="/add_food_track_entry">Add Entry</a>&nbsp;|&nbsp;
+      <a href="/dashboard">Main Dashboard</a>&nbsp;|&nbsp;
+      <a href="/logout">Logout</a><br />
+
+      <img src="static/food_dashboard.jpg" height="75%" width="75%" /><br />
+
+      <br />
+      <table id="all-students" border="1">
+        <tr>
+          <th>Foodname</th>
+          <th>Quantity Consumed</th>
+          <th>Calorie Intake</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+          <td>{{i['food_name']}}</td>
+          <td style="text-align: center">{{i['quantity_taken']}}</td>
+          <td style="text-align: center">{{i['calorie_input']}}</td>
+          <td>{{i['date']}}</td>
+          <td style="padding: 4px">
+            &nbsp;
+            <a href="/{{i['user_food_log_id']}}/update_food_track_entry"
+              >Update</a
+            >&nbsp;|&nbsp;
+            <a href="/{{i['user_food_log_id']}}/delete_food_track_entry"
+              >Delete</a
+            >&nbsp;
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </center>
+  </body>
+</html>

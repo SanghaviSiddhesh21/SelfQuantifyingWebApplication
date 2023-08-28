@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Start Run</title>
+  </head>
+  <body>
+    <center style="margin-top: 150px">
+      <h1 style="font-weight: lighter">Track Your Run</h1>
+      <form method="POST">
+        <button
+          type="submit"
+          onclick="alert('Run Started!')"
+          name="Run_entry"
+          value="start_run"
+        >
+          Start</button
+        >&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+        <button
+          type="submit"
+          onclick="alert('Run Completed!')"
+          name="Run_entry"
+          value="end_run"
+        >
+          End
+        </button>
+        <input type="hidden" id="custId" name="log_id" value="{{log_id}}" />
+      </form>
+    </center>
+  </body>
+</html>

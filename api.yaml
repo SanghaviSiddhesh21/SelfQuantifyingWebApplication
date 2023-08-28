@@ -1,0 +1,824 @@
+openapi: 3.0.0
+info:
+  title: MyTracker
+  version: 1.0.0
+  description: Tracker is a Web Application aimed to help the user to analyse 
+               their habbit in a better way to improve the quality of life of an                indiviual. So Sign in and progress yourself to a better                          lifestyle...!
+              <h2>Error information</h2>
+              <p>General API Error - G <br/>User API Error - U <br/>Food tracker API Error - F <br/>Run tracker API Error - R <br/>Walk tracker API Error - W <br/>Expense tracker API Error - E <br/></p>
+                  <table>
+                    <thead>
+                      <th>Error Code &nbsp;</th>
+                      <th>Message</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>G1001</td>
+                        <td>No tracker exists</td>
+                      </tr>
+                      <tr>
+                        <td>U1001</td>
+                        <td>Username does not exists</td>
+                      </tr>
+                      <tr>
+                        <td>U1002,F1002,R1002,W1002,E1002</td>
+                        <td>Password necessary</td>
+                      </tr>
+                      <tr>
+                        <td>U1003,F1004,R1004,W1004,E1004</td>
+                        <td>Incorrect password</td>
+                      </tr>
+                      <tr>
+                        <td>U1004</td>
+                        <td>First Name missing</td>
+                      </tr>
+                      <tr>
+                        <td>U1005</td>
+                        <td>Incorrect First Name</td>
+                      </tr>
+                      <tr>
+                        <td>U1006,F1014,R1006,W1006,E1006</td>
+                        <td>Date not in correct format</td>
+                      </tr>
+                      <tr>
+                        <td>U1007</td>
+                        <td>Same password should be typed in the re-enter password section</td>
+                      </tr>
+                      <tr>
+                        <td>U1008</td>
+                        <td>Username already exists</td>
+                      </tr>
+                      <tr>
+                        <td>F1001,R001,W001,E1001</td>
+                        <td>Username required</td>
+                      </tr>
+                      <tr>
+                        <td>F1003,R1003,W1003,E1003</td>
+                        <td>Username not present</td>
+                      </tr>                      
+                      <tr>
+                        <td>F1011</td>
+                        <td>log for the given values doesn not exists, hence cannot be updated</td>
+                      </tr>
+                      <tr>
+                        <td>F1012</td>
+                        <td>Quantity Should be in form of float</td>
+                      </tr>
+                      <tr>
+                        <td>R1005</td>
+                        <td>Start run first</td>
+                      </tr>
+                      <tr>
+                        <td>W1005</td>
+                        <td>Start walk first</td>
+                      </tr>
+                      <tr>
+                        <td>E1007</td>
+                        <td>Expense amount in correct format</td>
+                      </tr>
+                      <tr>
+                        <td>E1008</td>
+                        <td>The specified entry does not exists hence cannot be deleted</td>
+                      </tr>                      
+                    </tbody>
+                  </table>
+servers:
+  - url: http://192.168.0.108:8080/
+paths:
+  /api/get_all_trackers:
+    description: >-
+      For getting the list of all the trackers in the system
+    get:
+      description: Operation to get the list of all the trackers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  Existense:
+                    type: string
+                    example: true/false                 
+        '404':
+          description: Resource error
+        '500':
+          description: Internal Server Error 
+  /api/get_all_food_nutrients:
+    description: >-
+      For getting the list of all the food items in the system
+    get:
+      description: Operation to get the list of all the food items
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  Existense:
+                    type: string
+                    example: true/false                 
+        '404':
+          description: Resource error
+        '500':
+          description: Internal Server Error
+          
+  /api/userchecks/{username}:
+    description: >-
+      For checking if a particular username exists, to register new user and for 
+      deleting a user
+    get:
+      description: Operation to check if a user exists
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: Type_username_to_check_here
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  Existense:
+                    type: string
+                    example: true/false                 
+        '404':
+          description: Resource error
+        '500':
+          description: Internal Server Error
+    delete:
+      description: Operation to delete the user.
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: John
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: user object
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: John_password
+      responses:
+        '200':
+          description: Successfully Deleted.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string                  
+        '404':
+          description: Resource Error.
+        '500':
+          description: Internal Server Error.
+  /api/userchecks:
+    description: End point to create a user.
+    post:
+      description: Operation to create a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: user object
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: John
+                last_name:
+                  type: string
+                  example: Doe
+                date_of_birth:
+                  type: string
+                  example: 2000/12/31
+                username:
+                  type: string
+                  example: John31                  
+                password:
+                  type: string
+                  example: John3112                  
+                re_enter_password:
+                  type: string
+                  example: John3112                           
+      responses:
+        '201':
+          description: Successfully Created.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '404':
+          description: Resource error.
+        '500':
+          description: Internal Server Error.                  
+
+  /api/user/add_food_log:        
+      description: End point for adding food entry
+      post:
+        description: To add food entry of a user 
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+                  food_name:
+                    type: string
+                    example: Food_old
+                  quantity:
+                    type: number
+                    example: 0.0
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error. 
+
+  /api/user/food_tracker_logs:        
+      description: End point for the food tracker.
+      post:
+        description: To get all the food entried of a user 
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.   
+      put:
+        description: To change a food entry which has been logged in incorrectly
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+                  food_name_old:
+                    type: string
+                    example: Food_old
+                  food_name_new:
+                    type: string
+                    example: Food_new
+                  quantity_old:
+                    type: number
+                    example: 0.0
+                  quantity_new:
+                    type: number
+                    example: 0.0
+                  date_old:
+                    type: string
+                    example: 2000-12-31
+                  date_new:
+                    type: string
+                    example: 2000-12-31
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.
+      delete:
+        description: For deleting a food_log entry from the database
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+                  food_name:
+                    type: string
+                    example: Food_name
+                  quantity:
+                    type: number
+                    example: 0.0
+                  date:
+                    type: string
+                    example: 2000-12-31
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.    
+  
+  /api/user/add_run:        
+      description: End point for starting and stopping run tracker.
+      post:
+        description:  For starting run log
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.   
+      put:
+        description:  For starting run log
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.                 
+  
+  /api/user/run_tracker_logs:        
+      description: End point for the run tracker.
+      post:
+        description: To get all the run logs of the user 
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error. 
+      delete:
+        description: For deleting a run log of the user
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+                  cal_burned:
+                    type: number
+                    example: 0.0
+                  date:
+                    type: string
+                    example: 2000-12-31
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.                            
+            
+  /api/user/add_walk:        
+      description: End point for starting and stopping walk tracker.
+      post:
+        description:  For starting walk log
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.   
+      put:
+        description:  For starting run log
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.    
+           
+  /api/user/walk_tracker_logs:        
+      description: End point for the walk tracker.
+      post:
+        description: To get all the walk logs of the user 
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.  
+      delete:
+        description: For deleting a walk log of the user
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+                  cal_burned:
+                    type: number
+                    example: 0.0
+                  date:
+                    type: string
+                    example: 2000-12-31
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.
+            
+  /api/user/add_expense_log:        
+      description: End point for adding expense log.
+      post:
+        description:  For adding expense log of the user
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+                  amount:
+                    type: number
+                    example: 0.0
+                  expense_criteria:
+                    type: string
+                    example: criteria_name
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.
+
+
+  /api/user/expense_log:        
+      description: End point for getting, deleting expense log.
+      post:
+        description:  For getting expense log of the user
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.           
+      delete:
+        description: For deleting expense entry
+        requestBody:
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: John
+                  password:
+                    type: string
+                    example: John_password
+                  amount:
+                    type: number
+                    example: 0.0
+                  expense_criteria:
+                    type: string
+                    example: criteria_name
+                  date:
+                    type: string
+                    example: 2000-12-31
+        responses:
+          '201':
+            description: Successfully Received.
+          '400':
+            description: Bad request.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error_code:
+                      type: string
+                    error_message:
+                      type: string
+          '404':
+            description: Resource error.
+          '500':
+            description: Internal Server Error.         
+ 

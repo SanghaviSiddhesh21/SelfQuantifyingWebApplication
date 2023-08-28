@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Walk it!</title>
+  </head>
+  <body>
+    <center style="margin-top: 100px">
+      <h1 style="font-weight: lighter">Walk tracker open dashboard</h1>
+      <a href="/add_walk_track_entry">Start your walk</a>&nbsp;|&nbsp;<a
+        href="/dashboard"
+        >Main Dashboard</a
+      >&nbsp;|&nbsp;
+
+      <a href="/logout">Logout</a><br />
+      <img
+        src="static/walk_dashboard.jpg"
+        height="75%"
+        width="75%"
+      /><br /><br />
+      <table id="all_walk_logs" border="1">
+        <tr>
+          <th>Date</th>
+          <th>Duration(mins)</th>
+          <th>Calorie Burned(Kcal)</th>
+          <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+          <td style="text-align: center; padding: 5px">{{i['date']}}</td>
+          <td style="text-align: center">{{i['duration']}}</td>
+          <td style="text-align: center">{{i['calorie_burnt']}}</td>
+          <td style="text-align: center; padding: 5px">
+            <a href="/{{i['walk_log_id']}}/delete_walk_track_entry">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </center>
+  </body>
+</html>

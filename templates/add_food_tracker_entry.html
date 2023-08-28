@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Entry</title>
+  </head>
+  <body>
+    <center>
+      <h1 style="font-weight: lighter; margin-top: 100px">Food Entry Page</h1>
+      <a href="/dashboard">Main Dashboard</a>&nbsp;|&nbsp;<a
+        href="/open_dashboard_1"
+        >Food Tracker</a
+      >&nbsp;|&nbsp;
+      <a href="/logout">Logout</a>
+      <form action="/add_food_track_entry" method="POST">
+        <br />
+        <label for="food">Choose an item:</label>
+        <select id="food" name="food">
+          {% for i in data %}
+          <option name="name" value="{{i['food_name']}}">
+            {{i['food_name']}}
+          </option>
+          {% endfor %}</select
+        >&nbsp;
+        <label for="quantity">Quantity(g):</label>
+        <input
+          type="number"
+          name="quantity"
+          value="0.0"
+          step="0.01"
+        /><br /><br />
+        <input type="submit" />
+      </form>
+    </center>
+  </body>
+</html>

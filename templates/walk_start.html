@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Walk it!</title>
+  </head>
+  <body>
+    <center style="margin-top: 100px">
+      <h1 style="font-weight: lighter">Track Your Walk</h1>
+      <form method="POST">
+        <button
+          type="submit"
+          onclick="alert('Walk Started!')"
+          name="Walk_entry"
+          value="start_walk"
+        >
+          Start</button
+        >&nbsp;&nbsp;|&nbsp;&nbsp;
+        <button
+          type="submit"
+          onclick="alert('Walk Completed!')"
+          name="Walk_entry"
+          value="end_walk"
+        >
+          End
+        </button>
+        <input type="hidden" id="custId" name="log_id" value="{{log_id}}" />
+      </form>
+    </center>
+  </body>
+</html>
